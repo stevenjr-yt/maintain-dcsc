@@ -26,6 +26,28 @@
                               radial-gradient(circle at top right, #2a2a2a 0%, transparent 20%);
         }
 
+        /* --- ANIMATIONS --- */
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(253, 203, 19, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(253, 203, 19, 0.9)); transform: scale(1.05); }
+            100% { filter: drop-shadow(0 0 5px rgba(253, 203, 19, 0.4)); transform: scale(1); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(-18deg) scale(1.02); }
+        }
+
+        @keyframes slideTape {
+            0% { background-position: 0 0; }
+            100% { background-position: -60px 0; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Top Header Logos Placeholder */
         .header-logos {
             background-color: #ffffff;
@@ -34,27 +56,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 20px;
             margin-top: 40px;
             margin-bottom: 30px;
             width: 90%;
             max-width: 600px;
             z-index: 10;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .header-logos img {
-            height: 35px;
-            object-fit: contain;
-        }
-
-        /* Teks placeholder jika gambar logo tidak ada */
         .logo-text-placeholder {
             color: #000;
-            font-size: 10px;
+            font-size: clamp(8px, 2vw, 10px);
             font-weight: 700;
             text-align: center;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
         }
 
@@ -63,7 +83,7 @@
             position: relative;
             width: 90%;
             max-width: 800px;
-            padding: 40px 20px 80px 20px;
+            padding: 40px 20px 100px 20px;
             text-align: center;
             z-index: 10;
             flex-grow: 1;
@@ -77,8 +97,8 @@
             position: absolute;
             top: 150px;
             bottom: 0;
-            left: 20px;
-            right: 20px;
+            left: 5%;
+            right: 5%;
             border: 3px solid #FDCB13;
             border-bottom: none;
             border-radius: 20px 20px 0 0;
@@ -96,26 +116,30 @@
             background: #1a1b1e;
             line-height: 1;
         }
-
-        .border-decoration::before {
-            left: -15px;
-        }
-
-        .border-decoration::after {
-            right: -15px;
-        }
+        .border-decoration::before { left: -15px; }
+        .border-decoration::after { right: -15px; }
 
         /* Warning Icon */
         .warning-icon {
-            width: 100px;
+            width: clamp(80px, 15vw, 120px);
             height: auto;
             margin-bottom: 20px;
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
         /* Typography */
+        .animated-text {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
         h1 {
             color: #FDCB13;
-            font-size: 36px;
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 15px;
@@ -123,14 +147,14 @@
         }
 
         h2 {
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 24px);
             font-weight: 600;
             letter-spacing: 1.5px;
             margin-bottom: 40px;
         }
 
         p {
-            font-size: 15px;
+            font-size: clamp(13px, 2.5vw, 16px);
             line-height: 1.6;
             margin-bottom: 25px;
             font-weight: 400;
@@ -142,7 +166,7 @@
         /* Bottom Caution Tape */
         .caution-tape {
             width: 100%;
-            height: 40px;
+            height: clamp(30px, 5vw, 50px);
             background: repeating-linear-gradient(
                 -45deg,
                 #FDCB13,
@@ -150,9 +174,11 @@
                 #000000 30px,
                 #000000 60px
             );
+            background-size: 120px 100%;
             position: absolute;
-            bottom: 60px;
+            bottom: clamp(40px, 8vw, 80px);
             z-index: 5;
+            animation: slideTape 2s linear infinite;
         }
 
         /* Background bottom curve/shape */
@@ -160,39 +186,47 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100px;
+            height: clamp(60px, 12vw, 120px);
             background-color: #111111;
             z-index: 4;
             border-top-left-radius: 50% 20px;
             border-top-right-radius: 50% 20px;
         }
 
-        /* Megaphone Image Placeholder */
+        /* Megaphone Graphic */
         .megaphone {
             position: absolute;
             bottom: 10px;
-            left: -20px;
-            width: 250px;
+            left: -5%;
+            width: clamp(150px, 30vw, 300px);
             z-index: 20;
             transform: rotate(-10deg);
+            transform-origin: bottom left;
+            animation: wiggle 2.5s infinite ease-in-out;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 600px) {
-            h1 { font-size: 28px; }
-            h2 { font-size: 16px; }
-            p { font-size: 13px; }
-            .border-decoration { left: 10px; right: 10px; }
-            .megaphone { width: 150px; bottom: 30px; left: -10px; }
-            .header-logos { flex-wrap: wrap; padding: 10px; }
+        /* Responsiveness for Tablets and Desktops */
+        @media (min-width: 768px) {
+            .border-decoration {
+                left: 20px;
+                right: 20px;
+            }
+            .megaphone {
+                left: -20px;
+                bottom: 20px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .content-wrapper {
+                padding-bottom: 120px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Logos -->
     <div class="header-logos">
-        <!-- Ganti src dengan logo asli jika sudah tersedia -->
         <div class="logo-text-placeholder">
             <span>[Logo Darmajaya]</span>
             <span style="color: blue;">Teknik Informatika</span>
@@ -201,43 +235,39 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="content-wrapper">
         <div class="border-decoration"></div>
         
-        <!-- Warning Icon SVG -->
-        <svg class="warning-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="warning-icon animated-text" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 5L95 85H5L50 5Z" stroke="#FDCB13" stroke-width="6" stroke-linejoin="round"/>
             <path d="M50 15L87 80H13L50 15Z" fill="#FDCB13" fill-opacity="0.2" stroke="#FDCB13" stroke-width="2" stroke-linejoin="round"/>
             <rect x="46" y="35" width="8" height="25" rx="4" fill="#FDCB13"/>
             <circle cx="50" cy="70" r="5" fill="#FDCB13"/>
         </svg>
 
-        <h1>MAINTENANCE<br>NOTICE</h1>
-        <h2>CTF.CYSECDARMAJAYA.SPACE</h2>
+        <h1 class="animated-text delay-1">MAINTENANCE<br>NOTICE</h1>
+        <h2 class="animated-text delay-2">CTF.CYSECDARMAJAYA.SPACE</h2>
 
-        <p>
+        <p class="animated-text delay-3">
             Demi menjaga stabilitas dan keandalan sistem<br>
             Platform Capture The Flag Darmajaya Cyber Security<br>
             Club akan dilakukan Maintanance berkala
         </p>
 
-        <p>
+        <p class="animated-text delay-3">
             Kami mengucapkan Terimakasih telah belajar, bermain<br>
             dengan menggunakan Platform Kami<br>
             Jangan Khawatir, History Solve, Point tidak akan<br>
             hilang selama masa maintenance.
         </p>
 
-        <p>
+        <p class="animated-text delay-4">
             Akan kami informasikan segera jika maintenance<br>
             selesai
         </p>
     </div>
 
-    <!-- Megaphone Graphic (Menggunakan Emoji SVG sebagai fallback ilustrasi) -->
     <svg class="megaphone" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <!-- Bentuk dasar megaphone mengikuti style warna ungu/kuning di gambar -->
         <path d="M40 180 L160 140 C180 130 190 90 170 50 C150 10 110 -10 90 10 L10 90 C-10 110 -10 150 10 170 C20 180 30 185 40 180 Z" fill="#6A1B9A"/>
         <path d="M30 170 L150 130 C170 120 180 80 160 40 C140 10 100 -5 80 15 L15 80 C-5 100 -5 140 15 160 C25 170 30 175 30 170 Z" fill="#FDCB13"/>
         <path d="M60 140 L130 110 C140 105 145 80 135 60 C125 40 100 30 90 40 L35 90 C25 100 25 120 35 130 C45 140 50 145 60 140 Z" fill="#F1F1F1"/>
@@ -245,10 +275,8 @@
         <circle cx="120" cy="80" r="10" fill="#1a1b1e"/>
     </svg>
 
-    <!-- Caution Tape -->
     <div class="caution-tape"></div>
     
-    <!-- Bottom Dark Shape -->
     <div class="bottom-shape"></div>
 
 </body>
